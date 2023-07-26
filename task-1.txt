@@ -1,0 +1,105 @@
+1. Загрузка образа `busybox`
+   
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker pull busybox
+Using default tag: latest
+latest: Pulling from library/busybox
+3f4d90098f5b: Pull complete
+Digest: sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+
+What's Next?
+  View summary of image vulnerabilities and recommendations → docker scout quickview busybox
+
+  2. Запуск нового контейнера `busybox` с командой ping сайта `netology.ru`, и количеством пингов 7
+  
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker run --name pinger -it busybox ping -c 7 netology.ru 
+PING netology.ru (188.114.99.224): 56 data bytes
+64 bytes from 188.114.99.224: seq=0 ttl=62 time=14.969 ms
+64 bytes from 188.114.99.224: seq=1 ttl=62 time=12.480 ms
+64 bytes from 188.114.99.224: seq=2 ttl=62 time=12.779 ms
+64 bytes from 188.114.99.224: seq=3 ttl=62 time=12.868 ms
+64 bytes from 188.114.99.224: seq=4 ttl=62 time=12.555 ms
+64 bytes from 188.114.99.224: seq=5 ttl=62 time=13.158 ms
+64 bytes from 188.114.99.224: seq=6 ttl=62 time=12.712 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 12.480/13.074/14.969 ms
+
+3. Список всех контейнеров - запущенных и остановленных
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                      PORTS     NAMES
+bfafdad86c10   busybox   "ping -c 7 netology.…"   About a minute ago   Exited (0) 30 seconds ago             pinger
+
+4. Логи контейнера с именем pinger
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker logs -ft pinger
+2023-07-26T14:26:58.594409498Z PING netology.ru (188.114.99.224): 56 data bytes
+2023-07-26T14:26:58.609486169Z 64 bytes from 188.114.99.224: seq=0 ttl=62 time=14.969 ms
+2023-07-26T14:26:59.607383760Z 64 bytes from 188.114.99.224: seq=1 ttl=62 time=12.480 ms
+2023-07-26T14:27:00.607849391Z 64 bytes from 188.114.99.224: seq=2 ttl=62 time=12.779 ms
+2023-07-26T14:27:01.608232631Z 64 bytes from 188.114.99.224: seq=3 ttl=62 time=12.868 ms
+2023-07-26T14:27:02.608013151Z 64 bytes from 188.114.99.224: seq=4 ttl=62 time=12.555 ms
+2023-07-26T14:27:03.608987780Z 64 bytes from 188.114.99.224: seq=5 ttl=62 time=13.158 ms
+2023-07-26T14:27:04.608815492Z 64 bytes from 188.114.99.224: seq=6 ttl=62 time=12.712 ms
+2023-07-26T14:27:04.608845458Z
+2023-07-26T14:27:04.608849435Z --- netology.ru ping statistics ---
+2023-07-26T14:27:04.608852851Z 7 packets transmitted, 7 packets received, 0% packet loss
+2023-07-26T14:27:04.608856418Z round-trip min/avg/max = 12.480/13.074/14.969 ms
+
+5. Запуск второй раз контейнера с именем pinger
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker start pinger   
+pinger
+
+6. Список всех контейнеров - запущенных и остановленных
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                      PORTS     NAMES
+bfafdad86c10   busybox   "ping -c 7 netology.…"   5 minutes ago   Exited (0) 30 seconds ago             pinger
+
+7. Логи контейнера с именем pinger
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker logs -ft pinger
+2023-07-26T14:26:58.594409498Z PING netology.ru (188.114.99.224): 56 data bytes
+2023-07-26T14:26:58.609486169Z 64 bytes from 188.114.99.224: seq=0 ttl=62 time=14.969 ms
+2023-07-26T14:26:59.607383760Z 64 bytes from 188.114.99.224: seq=1 ttl=62 time=12.480 ms
+2023-07-26T14:27:00.607849391Z 64 bytes from 188.114.99.224: seq=2 ttl=62 time=12.779 ms
+2023-07-26T14:27:01.608232631Z 64 bytes from 188.114.99.224: seq=3 ttl=62 time=12.868 ms
+2023-07-26T14:27:02.608013151Z 64 bytes from 188.114.99.224: seq=4 ttl=62 time=12.555 ms
+2023-07-26T14:27:03.608987780Z 64 bytes from 188.114.99.224: seq=5 ttl=62 time=13.158 ms
+2023-07-26T14:27:04.608815492Z 64 bytes from 188.114.99.224: seq=6 ttl=62 time=12.712 ms
+2023-07-26T14:27:04.608845458Z
+2023-07-26T14:27:04.608849435Z --- netology.ru ping statistics ---
+2023-07-26T14:27:04.608852851Z 7 packets transmitted, 7 packets received, 0% packet loss
+2023-07-26T14:27:04.608856418Z round-trip min/avg/max = 12.480/13.074/14.969 ms
+2023-07-26T14:31:52.742411677Z PING netology.ru (188.114.98.224): 56 data bytes
+2023-07-26T14:31:52.749733458Z 64 bytes from 188.114.98.224: seq=0 ttl=62 time=7.222 ms
+2023-07-26T14:31:53.749838261Z 64 bytes from 188.114.98.224: seq=1 ttl=62 time=7.204 ms
+2023-07-26T14:31:54.751257364Z 64 bytes from 188.114.98.224: seq=2 ttl=62 time=8.082 ms
+2023-07-26T14:31:55.750443383Z 64 bytes from 188.114.98.224: seq=3 ttl=62 time=7.146 ms
+2023-07-26T14:31:56.751354065Z 64 bytes from 188.114.98.224: seq=4 ttl=62 time=7.723 ms
+2023-07-26T14:31:57.751093805Z 64 bytes from 188.114.98.224: seq=5 ttl=62 time=7.365 ms
+2023-07-26T14:31:58.751350071Z 64 bytes from 188.114.98.224: seq=6 ttl=62 time=7.327 ms
+2023-07-26T14:31:58.751415662Z
+2023-07-26T14:31:58.751419950Z --- netology.ru ping statistics ---
+2023-07-26T14:31:58.751423246Z 7 packets transmitted, 7 packets received, 0% packet loss
+2023-07-26T14:31:58.751426462Z round-trip min/avg/max = 7.146/7.438/8.082 ms
+
+8. Определите по логам общее количество запусков команды ping и какое общее количество отправленых запросов
+  Команда ping запускалась два раза, общее количество запросов 14.
+
+9. Удаление контейнера с именем pinger
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker rm pinger      
+pinger
+
+10. Удаление образа busybox
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker rmi busybox
+Untagged: busybox:latest
+Untagged: busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
+Deleted: sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824
+Deleted: sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f

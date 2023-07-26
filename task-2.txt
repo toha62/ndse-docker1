@@ -1,0 +1,50 @@
+1. Загрузите образ node версии 18.00
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker pull node:18
+18: Pulling from library/node
+d52e4f012db1: Pull complete
+7dd206bea61f: Pull complete
+2320f9be4a9c: Pull complete
+6e5565e0ba8d: Pull complete
+5f1526a28cf9: Pull complete
+c382c04dfe30: Pull complete
+52a071bceb4b: Pull complete
+ac9c06f919c0: Pull complete
+Digest: sha256:e7e0921e352fc579d4d1807ecb2a91f42548cb5097e8bd2742e13bd672b7dc4a
+Status: Downloaded newer image for node:18
+docker.io/library/node:18
+
+What's Next?
+  View summary of image vulnerabilities and recommendations → docker scout quickview node:18
+
+2. Запустите контейнер node в интерактивном режиме подключения терминала, поименуйте его mynode, передайте две переменные среды NAME=<ваше имя> и SURNAME=<ваша фамилия>
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker run --name mynode -it -e NAME=Anton -e SURNAME=Trifonov  node:18
+Welcome to Node.js v18.17.0.
+Type ".help" for more information.
+
+3. В интерактивной среде выполнения node выполните скрипт, который выведет на экран приветсвтие: Привет, <ваше имя> <ваша фамилия>!, эти данные должны быть получены из переменных среды
+
+> console.log('Привет ', process.env.NAME, process.env.SURNAME, '!')
+Привет  Anton Trifonov !
+undefined
+
+4. Остановите контейнер
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker stop mynode
+mynode
+
+5. Удалите образ node версии 18.00
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker rmi node:18
+Untagged: node:18
+Untagged: node@sha256:e7e0921e352fc579d4d1807ecb2a91f42548cb5097e8bd2742e13bd672b7dc4a
+Deleted: sha256:0f9df951673ddc5c6a4b0b25e8d58248c93a6e1bcbf8207f2650b97492c08201
+Deleted: sha256:7c464dc33440b452005358a9073c24330d5af53072181f471576d5d9240ba32e
+Deleted: sha256:2c7a68520c506c76c051177e8cc496abe5a1799f36357eb56401345b885914ed
+Deleted: sha256:64595435a9b864b443bd298fe7463f9f0f90e9b80992f7881dd6212b12c290a1
+Deleted: sha256:c3767412dc7a4b61d34c21949c7b277c007d7ee979170ae088b30604b394916d
+Deleted: sha256:47be7118de812a5e4dd0c80738586f76c4171587359b70e862b1760e93d0b18b
+Deleted: sha256:b80181f01d740ba89ac4b6ce18ec3ef3f374f14d972c2f874813c33990687e22
+Deleted: sha256:8faba640c5ba02612700e22f88797a571828443075845780f431d956aa72c456
+Deleted: sha256:61581d479298c795fa3cfe95419a5cec510085ec0d040306f69e491a598e7707

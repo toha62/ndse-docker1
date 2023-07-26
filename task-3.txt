@@ -1,0 +1,81 @@
+1. Загрузите образ node версии 18.00
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker pull node:18
+18: Pulling from library/node
+d52e4f012db1: Pull complete
+7dd206bea61f: Pull complete
+2320f9be4a9c: Pull complete
+6e5565e0ba8d: Pull complete
+5f1526a28cf9: Pull complete
+c382c04dfe30: Pull complete
+52a071bceb4b: Pull complete
+ac9c06f919c0: Pull complete
+Digest: sha256:e7e0921e352fc579d4d1807ecb2a91f42548cb5097e8bd2742e13bd672b7dc4a
+Status: Downloaded newer image for node:18
+docker.io/library/node:18
+
+What's Next?
+  View summary of image vulnerabilities and recommendations → docker scout quickview node:18
+
+2. Запустите контейнер с именем first_node из образа node версии 18 в фоновом режиме, подключив папку data из текущей директории в /var/first/data контейнера
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker run --name first_node -d -i -v C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1\data:/var/first/data node:18
+7025e47c16e6bcd2ab3c2890406a1328ad5e9ee432df94ca86b5cfb7028d6710
+
+3. Запустите контейнер с именем second_node из образа node версии 18 в фоновом режиме, подключив папку data из текущей директории в /var/second/data контейнера
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker run --name second_node -d -i -v C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1\data:/var/second/data node:18
+9fd16df46d0687947d617e6d28341a195d09aac08df4e0a4f53bb4de804b463a
+
+4. Подключитесь к контейнеру first_node с помощью exec и создайте текстовый файл любого содержания в /var/first/data
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker exec -it first_node /bin/bash
+root@7025e47c16e6:/# touch /var/first/data/test.txt
+
+5. Добавьте еще один файл в папку data на хостовой машине
+
+Anton@MAIN-PC MINGW64 ~/Documents/Учёба/Netology/Docker/Homework/docker1
+$ cd data
+
+Anton@MAIN-PC MINGW64 ~/Documents/Учёба/Netology/Docker/Homework/docker1/data
+$ touch test2.txt
+
+6. Подключитесь к контейнеру second_node с помощью exec и получите список файлов в директории /var/second/data, выведете на экран содержимое файлов
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker exec -it second_node /bin/bash
+root@9fd16df46d06:/# ls /var/second/data
+test.txt  test2.txt
+root@9fd16df46d06:/# cat /var/second/data/test.txt
+Hello, test1root@9fd16df46d06:/# cat /var/second/data/test2.txt
+Hello, test2root@9fd16df46d06:/# 
+
+7. Остановите оба контейнера
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker stop first_node
+first_node
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker stop second_node
+second_node
+
+8. Удалите оба контейнера
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker rm second_node  
+second_node
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker rm first_node   
+first_node
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+9. Удалите образ node версии 18
+
+PS C:\Users\Anton\Documents\Учёба\Netology\Docker\Homework\docker1> docker rmi node:18
+Untagged: node:18
+Untagged: node@sha256:e7e0921e352fc579d4d1807ecb2a91f42548cb5097e8bd2742e13bd672b7dc4a
+Deleted: sha256:0f9df951673ddc5c6a4b0b25e8d58248c93a6e1bcbf8207f2650b97492c08201
+Deleted: sha256:7c464dc33440b452005358a9073c24330d5af53072181f471576d5d9240ba32e
+Deleted: sha256:2c7a68520c506c76c051177e8cc496abe5a1799f36357eb56401345b885914ed
+Deleted: sha256:64595435a9b864b443bd298fe7463f9f0f90e9b80992f7881dd6212b12c290a1
+Deleted: sha256:c3767412dc7a4b61d34c21949c7b277c007d7ee979170ae088b30604b394916d
+Deleted: sha256:47be7118de812a5e4dd0c80738586f76c4171587359b70e862b1760e93d0b18b
+Deleted: sha256:b80181f01d740ba89ac4b6ce18ec3ef3f374f14d972c2f874813c33990687e22
+Deleted: sha256:8faba640c5ba02612700e22f88797a571828443075845780f431d956aa72c456
+Deleted: sha256:61581d479298c795fa3cfe95419a5cec510085ec0d040306f69e491a598e7707
